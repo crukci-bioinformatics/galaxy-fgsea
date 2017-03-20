@@ -50,9 +50,15 @@ rankTab <- read.table(rnk_file,
 
 ranks <-rankTab[,2]
 names(ranks) <- rankTab[,1]
+head(ranks)
 
 ## Report an error if gmt_file not found
-if(file.exists(gmt_file)) pathways <- gmtPathways(gmt_file)
-
+if(file.exists(gmt_file)) {
+  pathways <- gmtPathways(gmt_file)
+} else {
+  cat(paste("Could not find file ", gmt_file, "in folder", path_to_gmt))
+  cat("Printing contents of directory:")
+  list.files()
+}
 fgseaRes <- fgsea(pathways, ranks, minSize=min_size, maxSize=max_size, nperm=n_perm)
 write.table(fgseaRes, out_tab, sep="\t",row.names=FALSE)
