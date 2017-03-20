@@ -59,6 +59,7 @@ if(file.exists(gmt_file)) {
   cat(paste("Could not find file ", gmt_file, "in folder", path_to_gmt))
   cat("Printing contents of directory:")
   list.files()
+  getwd()
 }
 fgseaRes <- fgsea(pathways, ranks, minSize=min_size, maxSize=max_size, nperm=n_perm)
 write.table(fgseaRes, out_tab, sep="\t",row.names=FALSE)
