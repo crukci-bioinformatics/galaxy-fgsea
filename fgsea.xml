@@ -24,10 +24,11 @@
         --min_size '$min_size'
         --max_size '$max_size'
         --n_perm '$n_perm'
+        --out_tab '$out_tab'
     ]]></command>
     <inputs>
         <param name="rnk_file" help="A tabular file with gene symbols in the first column, and a ranked statistic (e.g. t-statistic or log fold-change) in the second column" type="data" format="tabular" />
-        <param name="genome" type="select" label="Select the name of the MSIGDB collection you want to test enrichment for">
+        <param name="gmt_file" type="select" label="Select the name of the MSIGDB collection you want to test enrichment for">
           <option value="h.all.v5.2.symbols.gmt" selected="true">h: hallmark gene sets</option>
           <option value="c1.all.v5.2.symbols.gmt">c1: positional gene sets</option>
           <option value="c2.cgp.v5.2.symbols.gmt">c2: chemical and genetic perturbations</option>
