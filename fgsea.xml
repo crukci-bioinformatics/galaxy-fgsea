@@ -59,15 +59,15 @@
         <param name="min_size" type="text" help="Minimal size of a gene set to test. All pathways below the threshold are excluded."
                label="Minimum Size of Gene Set?" value="1"/>
         <param name="max_size" type="text" help="Maximal size of a gene set to test. All pathways above the threshold are excluded."
-               label="Maximal Size of Gene Set?" value="500"/> 
-        <param name="n_perm" type="text" help="Specifies the number of permutations to perform in assessing the statistical significance of the enrichment score. It is best to start with a small number, such as 10, in order to check that your analysis will complete successfully (e.g., ensuring you have gene sets that satisfy the minimum and maximum size requirements and that the collapsing genes to symbols works correctly). After the analysis completes successfully, run it again with a full set of permutations. The recommended number of permutations is 1000. Default: 1000"  
+               label="Maximal Size of Gene Set?" value="500"/>
+        <param name="n_perm" type="text" help="Specifies the number of permutations to perform in assessing the statistical significance of the enrichment score. It is best to start with a small number, such as 10, in order to check that your analysis will complete successfully (e.g., ensuring you have gene sets that satisfy the minimum and maximum size requirements and that the collapsing genes to symbols works correctly). After the analysis completes successfully, run it again with a full set of permutations. The recommended number of permutations is 1000. Default: 1000"
                 label="Number of Permutations" value="1000"/>
-        <param name="top_n" type="text" help="The N gene sets with the most-significant p-values will be plotted. The N most up-regulated and N most down-regulated sets will be shown. So the actual number of plots shown could be twice this parameter"  
+        <param name="top_n" type="text" help="The N gene sets with the most-significant p-values will be plotted. The N most up-regulated and N most down-regulated sets will be shown. So the actual number of plots shown could be twice this parameter"
                 label="Top N genes to plot" value="10"/>
     </inputs>
     <outputs>
 
-        <data name="out_tab" format="tabular" label="Ranked gene sets">
+        <data name="out_tab" format="csv" label="Ranked gene sets">
         </data>
         <data name="summary_plot" format="pdf" label="summary plot">
         </data>
@@ -81,7 +81,7 @@
         </test>
     </tests>
     <help>
-** Disclaimer **      
+** Disclaimer **
 This section is taken from the help page for the GSEAPreanked tool in GenePattern: http://software.broadinstitute.org/cancer/software/genepattern/modules/docs/GSEAPreranked/1
 
 ** Introduction **
@@ -90,7 +90,7 @@ This tool runs Gene Set Enrichment Analysis (GSEA) against a user-supplied, rank
 
 ** Details **
 
-Gene Set Enrichment Analysis (GSEA) is a powerful analytical method for interpreting gene expression data.  It evaluates cumulative changes in the expression of groups of multiple genes defined based on prior biological knowledge. 
+Gene Set Enrichment Analysis (GSEA) is a powerful analytical method for interpreting gene expression data.  It evaluates cumulative changes in the expression of groups of multiple genes defined based on prior biological knowledge.
 
 The GSEAPreranked module can be used to conduct gene set enrichment analysis on data that do not conform to the typical GSEA scenario. For example, it can be used when the ranking metric choices provided by the GSEA module are not appropriate for the data, or when a ranked list of genomic features deviates from traditional microarray expression data (e.g., GWAS results, ChIP-Seq, RNA-Seq, etc.).
 
