@@ -19,7 +19,7 @@ option_list <- list(
   make_option(c("-top_n","--top_n"), default=10, help="The number of gene sets to produce diagnostics plots for. The top N up-regulated and top N down-regulated sets will be shown"),
   make_option(c("-summary_plot","--summary_plot"), type="character", help="Path to summary plot file."),
   make_option(c("-individual_plot","--individual_plot"), type="character", help="Path to individual plots file."),
-  make_option(c("-file_has_header","--file_has_header"),type="boolean",help="If this option is set to TRUE, the tool will assume that the ranked gene-list has a column heading and the gene names commence on the second line")
+  make_option(c("-file_has_header","--file_has_header"),type="logical",default=TRUE,help="If this option is set to TRUE, the tool will assume that the ranked gene-list has a column heading and the gene names commence on the second line")
 )
 
 parser <- OptionParser(usage = "%prog [options] file", option_list=option_list)
