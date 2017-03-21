@@ -6,6 +6,7 @@ loc <- Sys.setlocale("LC_MESSAGES", "en_US.UTF-8")
 suppressPackageStartupMessages({
   library("fgsea")
   library("optparse")
+  library("ggplot2")
 })
 
 option_list <- list(
@@ -14,7 +15,11 @@ option_list <- list(
   make_option(c("-gmt_file", "--gmt_file"), default="h.all.v5.2.symbols.gmt", type="character", help = "Path to Broad gmt file"),
   make_option(c("-min_size", "--min_size"), default=1, help="Minimal size of a gene set to test. All pathways below the threshold are excluded."),
   make_option(c("-max_size", "--max_size"), default=500, help="Maximal size of a gene set to test. All pathways above the threshold are excluded."),
-  make_option(c("n_perm", "--n_perm"),default=1000, help="Number of permutations to do. Minimial possible nominal p-value is about 1/nperm")
+  make_option(c("n_perm", "--n_perm"),default=1000, help="Number of permutations to do. Minimial possible nominal p-value is about 1/nperm"),
+  make_opion(c("top_n","--top_n"), default=10, help="The number of gene sets to produce diagnostics plots for. The top N up-regulated and top N down-regulated sets will be shown"),
+  make_option(c("-summary_plot","--summary_plot"), type="character", help="Path to summary plot file."),
+  make_option(c("-individual_plot","--individual_plot"), type="character", help="Path to individual plots file."),
+  make_option(c("-file_has_header","--file_has_header"),type="boolean",help="If this option is set to TRUE, the tool will assume that the ranked gene-list has a column heading and the gene names commence on the second line")
 )
 
 parser <- OptionParser(usage = "%prog [options] file", option_list=option_list)
@@ -29,7 +34,10 @@ out_tab = args$out_tab
 min_size = args$min_size
 max_size = args$max_size
 n_perm = args$n_perm
-
+top_n = args$top_n
+summary_plot = args$summary_plot
+individual_plot = args$individual_plot
+file_has_header = args$file_has_header
 ### Change to whatever path the gmt files are stored in
 path_to_gmt <- "/data/galaxy/git-galaxy-fgsea/"
 
@@ -42,12 +50,15 @@ gmt_file <-paste(path_to_gmt, gmt_file, sep="/")
 #min_size = 5
 #max_size = 500
 #n_perm=1000
+# top_n = 10
+# out_tab = "temp.csv"
+# summary_plot = "summary.pdf"
+# individual_plot = "gene-sets.pdf"
 
 ## Basically using the steps from the fgsea vignette
 
 rankTab <- read.table(rnk_file,
-                      header=TRUE, colClasses = c("character", "numeric"))
-
+                      header=file_has_header, colClasses = c("character", "numeric"))
 ranks <-rankTab[,2]
 names(ranks) <- rankTab[,1]
 head(ranks)
@@ -75,3 +86,26 @@ my.df[,8] <- gsub("c(","",my.df[,8],fixed=TRUE)
 my.df[,8] <- gsub(")","",my.df[,8],fixed=TRUE)
 
 write.csv(my.df, out_tab, row.names=FALSE)
+
+## Now make a summary plot, and some plots of particular gene sets
+
+topPathwaysUp <- fgseaRes[ES > 0][head(order(pval), n=top_n), pathway]
+topPathwaysDown <- fgseaRes[ES < 0][head(order(pval), n=top_n), pathway]
+topPathways <- c(topPathwaysUp, rev(topPathwaysDown))
+
+
+pdf(summary_plot)
+plotGseaTable(pathways[topPathways], ranks, fgseaRes, 
+              gseaParam = 0.5)
+dev.off()
+
+pdf(individual_plot)
+for(i in 1:top_n){
+  
+  p <- plotEnrichment(pathways[[topPathways[i]]],
+                 ranks) + ggtitle(topPathways[i])
+  print(p)
+}
+dev.off()
+
+sessionInfo()
