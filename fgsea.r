@@ -61,5 +61,9 @@ if(file.exists(gmt_file)) {
   list.files()
   getwd()
 }
+
 fgseaRes <- fgsea(pathways, ranks, minSize=min_size, maxSize=max_size, nperm=n_perm)
+dim(fgseaRes)
+head(fgseaRes)
+cat(paste("Attempting to write to file", out_tab))
 write.table(fgseaRes, out_tab, sep="\t",row.names=FALSE)
