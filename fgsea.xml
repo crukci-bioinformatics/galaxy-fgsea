@@ -59,7 +59,7 @@
     </inputs>
     <outputs>
 
-        <data name="out_tab" format="tabular" label="Ranked category list">
+        <data name="out_tab" format="tabular" label="Ranked gene sets">
         </data>
     </outputs>
     <tests>
