@@ -66,4 +66,12 @@ fgseaRes <- fgsea(pathways, ranks, minSize=min_size, maxSize=max_size, nperm=n_p
 dim(fgseaRes)
 head(fgseaRes)
 cat(paste("Attempting to write to file", out_tab))
-write.table(as.data.frame(fgseaRes), out_tab, sep="\t",row.names=FALSE)
+
+## 8th column of the output is a list, so cannot be put easily into a data frame
+## http://stackoverflow.com/questions/17291283/outputting-a-dataframe-in-r-to-a-csv
+
+my.df <- data.frame(lapply(fgseaRes, as.character), stringsAsFactors=FALSE)
+my.df[,8] <- gsub("c(","",my.df[,8],fixed=TRUE)
+my.df[,8] <- gsub(")","",my.df[,8],fixed=TRUE)
+
+write.csv(my.df, out_tab, row.names=FALSE)
