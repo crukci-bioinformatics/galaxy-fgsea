@@ -31,7 +31,7 @@ max_size = args$max_size
 n_perm = args$n_perm
 
 ### Change to whatever path the gmt files are stored in
-path_to_gmt <- "."
+path_to_gmt <- "/data/galaxy/git-galaxy-fgsea/"
 
 gmt_file <-paste(path_to_gmt, gmt_file, sep="/")
 
