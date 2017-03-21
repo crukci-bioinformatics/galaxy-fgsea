@@ -51,11 +51,11 @@
           <option value="c7.all.v5.2.symbols.gmt">c7: all immunologic signatures gene sets</option>
         </param>
         <param name="min_size" type="text" help="Minimal size of a gene set to test. All pathways below the threshold are excluded."
-               label="Minimum Size of Gene Set?" value=1/>
+               label="Minimum Size of Gene Set?" value="1"/>
         <param name="max_size" type="text" help="Maximal size of a gene set to test. All pathways above the threshold are excluded."
-               label="Maximal Size of Gene Set?" value=500/> 
+               label="Maximal Size of Gene Set?" value="500"/> 
         <param name="n_perm" type="text" help="Number of permutations to do. Minimial possible nominal p-value is about 1/nperm"  
-                label="Number of Permutations" value=1000/>
+                label="Number of Permutations" value="1000"/>
     </inputs>
     <outputs>
 
