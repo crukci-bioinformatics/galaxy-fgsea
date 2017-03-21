@@ -84,8 +84,9 @@ cat(paste("Attempting to write to file", out_tab))
 my.df <- data.frame(lapply(fgseaRes, as.character), stringsAsFactors=FALSE)
 my.df[,8] <- gsub("c(","",my.df[,8],fixed=TRUE)
 my.df[,8] <- gsub(")","",my.df[,8],fixed=TRUE)
-
-write.csv(my.df, out_tab, row.names=FALSE)
+my.df[,8] <- gsub("\n", "",my.df[,8],fixed=TRUE)
+my.df[,8] <- gsub("\"", "", my.df[,8],fixed=TRUE)
+write.table(my.df, out_tab, row.names=FALSE,sep="\t",quote=FALSE)
 
 ## Now make a summary plot, and some plots of particular gene sets
 
