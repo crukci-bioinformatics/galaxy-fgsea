@@ -62,7 +62,7 @@
         <param name="n_perm" type="text" help="Specifies the number of permutations to perform in assessing the statistical significance of the enrichment score. It is best to start with a small number, such as 10, in order to check that your analysis will complete successfully (e.g., ensuring you have gene sets that satisfy the minimum and maximum size requirements and that the collapsing genes to symbols works correctly). After the analysis completes successfully, run it again with a full set of permutations. The recommended number of permutations is 1000. Default: 1000"  
                 label="Number of Permutations" value="1000"/>
         <param name="top_n" type="text" help="The N gene sets with the most-significant p-values will be plotted. The N most up-regulated and N most down-regulated sets will be shown. So the actual number of plots shown could be twice this parameter"  
-                label="Top N genes to plot" value="1000"/>
+                label="Top N genes to plot" value="100"/>
     </inputs>
     <outputs>
 
