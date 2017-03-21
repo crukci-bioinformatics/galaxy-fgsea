@@ -16,7 +16,7 @@ option_list <- list(
   make_option(c("-min_size", "--min_size"), default=1, help="Minimal size of a gene set to test. All pathways below the threshold are excluded."),
   make_option(c("-max_size", "--max_size"), default=500, help="Maximal size of a gene set to test. All pathways above the threshold are excluded."),
   make_option(c("n_perm", "--n_perm"),default=1000, help="Number of permutations to do. Minimial possible nominal p-value is about 1/nperm"),
-  make_opion(c("top_n","--top_n"), default=10, help="The number of gene sets to produce diagnostics plots for. The top N up-regulated and top N down-regulated sets will be shown"),
+  make_option(c("top_n","--top_n"), default=10, help="The number of gene sets to produce diagnostics plots for. The top N up-regulated and top N down-regulated sets will be shown"),
   make_option(c("-summary_plot","--summary_plot"), type="character", help="Path to summary plot file."),
   make_option(c("-individual_plot","--individual_plot"), type="character", help="Path to individual plots file."),
   make_option(c("-file_has_header","--file_has_header"),type="boolean",help="If this option is set to TRUE, the tool will assume that the ranked gene-list has a column heading and the gene names commence on the second line")
