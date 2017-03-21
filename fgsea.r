@@ -46,7 +46,7 @@ gmt_file <-paste(path_to_gmt, gmt_file, sep="/")
 ## Basically using the steps from the fgsea vignette
 
 rankTab <- read.table(rnk_file,
-                    header=TRUE, colClasses = c("character", "numeric"))
+                      header=TRUE, colClasses = c("character", "numeric"))
 
 ranks <-rankTab[,2]
 names(ranks) <- rankTab[,1]
@@ -66,4 +66,4 @@ fgseaRes <- fgsea(pathways, ranks, minSize=min_size, maxSize=max_size, nperm=n_p
 dim(fgseaRes)
 head(fgseaRes)
 cat(paste("Attempting to write to file", out_tab))
-write.table(fgseaRes, out_tab, sep="\t",row.names=FALSE)
+write.table(as.data.frame(fgseaRes), out_tab, sep="\t",row.names=FALSE)
