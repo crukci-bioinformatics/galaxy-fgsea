@@ -43,19 +43,28 @@ path_to_gmt <- "/data/galaxy/git-galaxy-fgsea/"
 
 gmt_file <-paste(path_to_gmt, gmt_file, sep="/")
 
-###temp values for testing
 
-#rnk_file <- "testdata/t47d_Treatment_DEA_Prog-vs-Control_all_for_GSEA.rnk"
-#gmt_file <- "h.all.v5.2.symbols.gmt"
-#min_size = 5
-#max_size = 500
-#n_perm=1000
-# top_n = 10
-# out_tab = "temp.csv"
-# summary_plot = "summary.pdf"
-# individual_plot = "gene-sets.pdf"
+## If testing locally, change to TRUE and arguments will be set below
+run_local <- FALSE
 
-## Basically using the steps from the fgsea vignette
+
+if (run_local) {
+
+  rnk_file <- "testdata/t47d_Treatment_DEA_Prog-vs-Control_all_for_GSEA.rnk"
+  gmt_file <- "h.all.v5.2.symbols.gmt"
+  path_to_gmt <- "."
+  min_size = 5
+  max_size = 500
+  n_perm=1000
+  top_n = 10
+  out_tab = "temp.csv"
+  summary_plot = "summary.pdf"
+  individual_plot = "gene-sets.pdf"
+  file_has_header = TRUE
+}
+
+
+## Basically using the steps from the fgsea vignette from now on
 
 rankTab <- read.table(rnk_file,
                       header=file_has_header, colClasses = c("character", "numeric"))
