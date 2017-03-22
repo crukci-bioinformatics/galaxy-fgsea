@@ -98,19 +98,22 @@ my.df[,8] <- gsub("\"", "", my.df[,8],fixed=TRUE)
 write.table(my.df, out_tab, row.names=FALSE,sep="\t",quote=FALSE)
 
 ## Now make a summary plot, and some plots of particular gene sets
+## Firstly collect the names of the top N up-and down-regulated pathways
 
 topPathwaysUp <- fgseaRes[ES > 0][head(order(pval), n=top_n), pathway]
 topPathwaysDown <- fgseaRes[ES < 0][head(order(pval), n=top_n), pathway]
 topPathways <- c(topPathwaysUp, rev(topPathwaysDown))
 
-
+## Plot the summary table of the top pathways
 pdf(summary_plot)
 plotGseaTable(pathways[topPathways], ranks, fgseaRes, 
               gseaParam = 0.5)
 dev.off()
 
 pdf(individual_plot)
-for(i in 1:top_n){
+
+#Use fgsea to make a plot of the top pathways and add a title using the ggtitle function from ggplot2
+for(i in seq_along(topPathways)){
   
   p <- plotEnrichment(pathways[[topPathways[i]]],
                  ranks) + ggtitle(topPathways[i])
